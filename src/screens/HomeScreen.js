@@ -33,7 +33,7 @@ export default function HomeScreen() {
     setRestData(restaurantCardData);
     getDrivingDistance(userLocation, restaurantCardData);
 
-  }, []);
+  }, [userLocation]);
 
   const handleApply = type => {
     if (type === 'rating') {
