@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import MapView, { Marker, PROVIDER_GOOGLE } from 'react-native-maps';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import { restaurantsData } from '../utils/data';
+
+
+const restaurantCardData = require('../utils/restaurantCard.json');
 
 export const MapSection = ({ userLocation }) => {
-  if (!userLocation) return null;
 
+ if (!userLocation) return null;
   return (
     <View style={styles.mapContainer}>
       <MapView
@@ -16,28 +18,28 @@ export const MapSection = ({ userLocation }) => {
         showsUserLocation={true}
         showsMyLocationButton={true}
       >
-        {restaurantsData.map(item => (
-          <Marker
-            key={item.id}
-            coordinate={{
-              latitude: userLocation.latitude + item.latOffset,
-              longitude: userLocation.longitude + item.lngOffset,
-            }}
-          >
-            <View style={styles.markerContainer}>
-              <View style={styles.markerBubble}>
-                <View style={styles.purpleDot}>
-                  <MaterialIcons name="add" size={8} color="#fff" />
-                </View>
-                <View>
-                  <Text style={styles.markerText}>{item.rating}</Text>
-                  <Text style={styles.markerText}>{item.name}</Text>
-                </View>
-              </View>
-              <View style={styles.pointer} />
-            </View>
-          </Marker>
-        ))}
+       {restaurantCardData.map(item => (
+    <Marker
+      key={item.id}
+      coordinate={{
+        latitude: item.latitude,
+        longitude: item.longitude,
+      }}
+    >
+      <View style={styles.markerContainer}>
+        <View style={styles.markerBubble}>
+          <View style={styles.purpleDot}>
+            <MaterialIcons name="add" size={8} color="#fff" />
+          </View>
+          <View>
+            <Text style={styles.markerText}>{item.rating}</Text>
+            <Text style={styles.markerText}>{item.name}</Text>
+          </View>
+        </View>
+        <View style={styles.pointer} />
+      </View>
+    </Marker>
+))}
       </MapView>
     </View>
   );

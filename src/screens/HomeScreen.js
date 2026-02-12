@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   View,
   TextInput,
@@ -6,6 +6,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   Text,
+  Modal,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
@@ -15,11 +16,85 @@ import { MapSection } from '../components/MapComponnent';
 import { RestaurantCard } from '../components/RestCardComponent';
 
 import { filterItem } from '../utils/filterItem';
-import restaurantCardData from '../utils/restaurantData';
+import { FilterModal } from '../components/FilterModal';
+
+const restaurantCardData = require('../utils/restaurantCard.json');
+
+
 
 export default function HomeScreen() {
   const { userLocation } = UseLocation();
   const [isMapVisible, setIsMapVisible] = useState(false);
+  const [restData, setRestData] = useState([]);
+  const [isFilterVisible, setIsFilterVisible] = useState(false);
+
+  useEffect(() => {
+    
+    setRestData(restaurantCardData);
+    getDrivingDistance(userLocation, restaurantCardData);
+
+  }, []);
+
+  const handleApply = type => {
+    if (type === 'rating') {
+      const sorted = [...restData].sort((a, b) => b.rating - a.rating);
+      setRestData(sorted);
+    }
+
+    if (type === 'distance') {
+      const sorted = [...restData].sort((a, b) => a.distanceValue - b.distanceValue);
+      setRestData(sorted);
+    }
+
+    setIsFilterVisible(false);
+  };
+
+  const getDrivingDistance = async (origin, restaurants) => {
+    try {
+      console.log('Total places:', restaurants.length);
+
+      for (let index = 0; index < restaurants.length; index++) {
+        const element = restaurants[index];
+
+        const url =
+          `https://maps.googleapis.com/maps/api/distancematrix/json?` +
+          `origins=${origin.latitude},${origin.longitude}` +
+          `&destinations=${element.latitude},${element.longitude}` +
+          `&mode=driving` +
+          `&key=AIzaSyAyxDBFwGBIzx9bPHP6RQcjJZp_-L4h-c0`;
+
+        const response = await fetch(url);
+
+        if (!response.ok) continue;
+
+        const data = await response.json();
+
+        if (
+          !data.rows?.[0]?.elements?.[0] ||
+          data.rows[0].elements[0].status !== 'OK'
+        )
+          continue;
+
+        const distanceData = data.rows[0].elements[0];
+        setRestData(prev =>
+          prev.map(item =>
+            item.id === element.id
+              ? {
+                  ...item,
+                  distanceText: distanceData.distance.text,
+                  distanceValue: distanceData.distance.value,
+                  durationText: distanceData.duration.text,
+                  durationValue: distanceData.duration.value,
+                }
+              : item,
+          ),
+        );
+      }
+
+    } catch (error) {
+      console.log('getDrivingDistance error:', error);
+    }
+  };
 
   return (
     <SafeAreaView style={styles.main}>
@@ -35,13 +110,25 @@ export default function HomeScreen() {
           style={styles.searchInput}
         />
       </View>
-
+      <FilterModal
+        isVisible={isFilterVisible}
+        onClose={() => setIsFilterVisible(false)}
+        onApply={handleApply}
+      />
       <View
         style={[
           styles.filtersContainer,
           { marginBottom: isMapVisible ? 0 : 20 },
         ]}
       >
+        <TouchableOpacity
+          style={styles.filterBtn}
+          onPress={() => {
+            setIsFilterVisible(true);
+          }}
+        >
+          <MaterialIcons name="list" size={20} color="#000" />
+        </TouchableOpacity>
         <FlatList
           data={filterItem}
           renderItem={({ item }) => (
@@ -70,7 +157,7 @@ export default function HomeScreen() {
 
         <FlatList
           style={styles.restaurantList}
-          data={restaurantCardData}
+          data={restData}
           keyExtractor={item => item.id.toString()}
           renderItem={({ item }) => (
             <RestaurantCard
@@ -105,12 +192,19 @@ const styles = StyleSheet.create({
   filtersContainer: {
     width: '100%',
     padding: 10,
+    flexDirection: 'row',
+  },
+  filterBtn: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 10,
+    width:40,
   },
   itemTextBtn: {
     flexDirection: 'row',
     alignItems: 'center',
     padding: 12,
-    margin:2,
+    margin: 2,
     backgroundColor: 'white',
     borderRadius: 15,
     marginHorizontal: 5,

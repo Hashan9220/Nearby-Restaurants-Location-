@@ -1,10 +1,11 @@
-const restaurantCardData = [
+ [
   { id: 1, 
     name: 'Seagate', 
     discount: 30, 
     address: 'Colombo,Sri Lanka', 
     image:require('../assets/1.jpeg'),
-    rating: 4.5 },
+    rating: 4.5, 
+  distance:''},
   {
     id: 2,
     name: 'Moonsea',
@@ -12,6 +13,7 @@ const restaurantCardData = [
     address: 'Colombo,Sri Lanka', 
     image:require('../assets/2.jpg'),
     rating: 4.8,
+    distance:''
   },
   {
     id: 3,
@@ -20,6 +22,7 @@ const restaurantCardData = [
     address: 'Colombo,Sri Lanka', 
     image:require('../assets/3.jpeg'),
     rating: 4.4,
+    distance:''
   },
   {
     id: 4,
@@ -28,15 +31,15 @@ const restaurantCardData = [
     address: 'Colombo,Sri Lanka', 
     image:require('../assets/4.jpg'),
     rating: 4.7,
+    distance:''
   },
-//   {
-//     id: 5,
-//     name: 'Rest Cafe',
-//     discount: 30, 
-//     address: 'Colombo,Sri Lanka', 
-//     image:require('../assets/5.jpeg'),
-//     rating: 4.5,
-//   },
+  {
+    id: 5,
+    name: 'Big Plate',
+    discount: 30, 
+    address: 'Colombo,Sri Lanka', 
+    image:require('../assets/4.jpg'),
+    rating: 4.5,
+    distance:''
+  },
 ];
-
-export default restaurantCardData;

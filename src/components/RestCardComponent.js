@@ -2,9 +2,16 @@ import React from 'react';
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native';
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
+  const imageMap = {
+  "1.jpeg": require("../assets/1.jpeg"),
+  "2.jpg": require("../assets/2.jpg"),
+  "3.jpeg": require("../assets/3.jpeg"),
+  "4.jpg": require("../assets/4.jpg"),
+};
 export const RestaurantCard = ({ item, onDirectionPress }) => (
+  
   <View style={styles.restaurantCard}>
-    <Image source={item.image} style={styles.restaurantImage} />
+    <Image source={imageMap[item.image]} style={styles.restaurantImage} />
     <View style={styles.restaurantCardHeader}>
       <Text style={styles.restaurantName}>{item.name}</Text>
       <View style={styles.discountTextContainer}>
@@ -15,6 +22,15 @@ export const RestaurantCard = ({ item, onDirectionPress }) => (
       <MaterialIcons name="star" size={15} color="gold" />
       <Text style={styles.ratingText}>Rating: {item.rating} |</Text>
       <Text style={styles.addressText}>{item.address}</Text>
+      <View style={styles.distanceViewText}> 
+        {item.durationText 
+        ?  
+        <Text style={styles.distanceText}>Distance : {item.distanceText}</Text> 
+        : 
+        <Text style={styles.distanceText}>Distance : {item.distance}km</Text>}
+
+      </View>
+      
     </View>
     <View style={styles.directionButtonContainer}>
       <TouchableOpacity
@@ -81,6 +97,16 @@ const styles = StyleSheet.create({
     marginLeft: 5,
     fontSize: 14,
     color: 'gray',
+  },
+  distanceViewText:{
+    alignItems:'flex-end',
+    width:'40%'
+  },
+   distanceText: {
+    marginLeft: 5,
+    fontSize: 14,
+    fontWeight:'800',
+    color: '#7c3aed',
   },
   directionButtonContainer: {
     flexDirection: 'row',
