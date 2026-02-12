@@ -138,6 +138,7 @@ src/
 ## 📸 Screenshots
 
 >  ![Image Alt](https://github.com/Hashan9220/Nearby-Restaurants-Location-/blob/b953cc20f2e85a1c6a3e65e2f6062c577794fabb/ss2.PNG)
+> ![Image Alt](https://github.com/Hashan9220/Nearby-Restaurants-Location-/blob/86008ccbd583873937d3141b1feff0717599ac36/ss3.PNG)
 
 ---
 
