@@ -8,7 +8,7 @@ import {
   Text,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { MaterialIcons } from '@react-native-vector-icons/material-icons';
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
 
 import { UseLocation } from '../components/UseLocationComponent';
 import { MapSection } from '../components/MapComponnent';
