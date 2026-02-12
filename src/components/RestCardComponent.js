@@ -7,6 +7,7 @@ import MaterialIcons from 'react-native-vector-icons/MaterialIcons';
   "2.jpg": require("../assets/2.jpg"),
   "3.jpeg": require("../assets/3.jpeg"),
   "4.jpg": require("../assets/4.jpg"),
+  "5.jpg": require("../assets/5.jpg"),
 };
 export const RestaurantCard = ({ item, onDirectionPress }) => (
   
