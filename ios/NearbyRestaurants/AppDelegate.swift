@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     reactNativeDelegate = delegate
     reactNativeFactory = factory
-    GMSServices.provideAPIKey("AIzaSyDYCOjQ_nSf3UsXobjfpCpviz6COcFE_Pk")
+    GMSServices.provideAPIKey("AIzaSyAyxDBFwGBIzx9bPHP6RQcjJZp_-L4h-c0")
     window = UIWindow(frame: UIScreen.main.bounds)
 
     factory.startReactNative(
