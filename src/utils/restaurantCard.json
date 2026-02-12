@@ -1,0 +1,57 @@
+[
+  {
+    "id": 1,
+    "name": "Waters Edge",
+    "discount": 30,
+    "latitude": 6.9058124, 
+    "longitude": 79.9091457,
+    "address": "Colombo, Sri Lanka",
+    "image": "1.jpeg",
+    "rating": 4.5,
+    "distance": 100
+  },
+  {
+    "id": 2,
+    "name": "Big Plate",
+    "discount": 30,
+    "latitude": 6.89664, 
+    "longitude": 79.8498445,
+    "address": "Colombo, Sri Lanka",
+    "image": "2.jpg",
+    "rating": 4.8,
+    "distance": 11
+  },
+  {
+    "id": 3,
+    "name": "Dinemore",
+    "discount": 30,
+    "latitude": 6.8947867, 
+    "longitude": 79.8503702,
+    "address": "Colombo, Sri Lanka",
+    "image": "3.jpeg",
+    "rating": 4.4,
+    "distance": 45
+  },
+  {
+    "id": 4,
+    "name": "Barracuda",
+    "discount": 30,
+    "latitude": 6.8645573, 
+    "longitude": 79.8569437,
+    "address": "Colombo, Sri Lanka",
+    "image": "4.jpg",
+    "rating": 4.7,
+    "distance": 55
+  },
+  {
+    "id": 5,
+    "name": "Coco Beach",
+    "discount": 30,
+    "latitude": 6.6992446, 
+    "longitude": 79.8917322,
+    "address": "Colombo, Sri Lanka",
+    "image": "4.jpg",
+    "rating": 4.5,
+    "distance": 62
+  }
+]
