@@ -61,7 +61,7 @@ export default function HomeScreen() {
           `origins=${origin.latitude},${origin.longitude}` +
           `&destinations=${element.latitude},${element.longitude}` +
           `&mode=driving` +
-          `&key=AIzaSyAyxDBFwGBIzx9bPHP6RQcjJZp_-L4h-c0`;
+          `&key=AIzaSyBRbciqkTflpeYXRTJBZlDQXgcwL9g118o`;
 
         const response = await fetch(url);
 
